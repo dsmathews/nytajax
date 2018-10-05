@@ -20,8 +20,9 @@ const getInput = function(event) {
 const displayResults = function(keywordInput, numRecordInput, startYearInput, endYearInput) {
     console.log ("displayResults keywordInput", keywordInput);
 
-    const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=bccea3c2aaa1417790728926205111bc&q=shadow`;
-    // const queryURL = `https://api.iextrading.com/1.0/stock/${/quote/batch?types=quote,news&range=1m&last=1`;
+    const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=bccea3c2aaa1417790728926205111bc&q=${keywordInput}&beg_date${startYearInput}&end_date${endYearInput}`;
+    // const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=bccea3c2aaa1417790728926205111bc&q=`;   
+    // const queryURL = `https://api.iextrading.com/1.0/stock/ibm/quote/batch?types=quote,news&range=1m&last=1`;
   
 
 $.ajax({
@@ -29,20 +30,35 @@ $.ajax({
     method: 'GET'
 
 }).then(function(response) {
-
-    const article = response.name;
     console.log(response);
+
+    for (let i=0; i<numRecordInput; i++) {
+    const article = response.response.docs[i].headline.main;
+    const articleUrl = response.response.docs[i].web_url;
+ 
+    console.log("article", article);
+
     // console.log(jason.stringify(response));
 
     const artElement = $('<p>').text(`${article}`);
+    const artUrlElement = $('<p>').text(`${articleUrl}`);
 
-    $('#results').append(artElement);
-
+ 
+    $('#results').prepend(artUrlElement);
+    $('#results').prepend(artElement);
+    $('#results').prepend(`<hr>`);
+   
+    }
 });
 
 }
 
+const clearResults = function() {
+
+    $('#results').empty();
+}
 
 
 $('#search').on('click', getInput);
+$('#clear').on('click', clearResults);
 
