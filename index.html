@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+<body>
+    
+<form>
+    <p>Search Term:</p>
+    <input type="text" id="keyword">
+    <br>
+    <p>Number of Record to Retrieve:</p>
+    <input type="number" id="numRecord">
+    <br>
+    <p>Start Year (optional):</p>
+    <input type="date" id="startYear">
+    <br>
+    <p>End Year (optional):</p>
+    <input type="date" id="endYear">
+    <br>
+    <br>
+    <button id = "search">Search</button>
+    <button id = "clear">Clear Results</button>
+
+</form>
+
+<main>
+    <p>Top Articles</p>
+    <br>
+    <div id=results></div>
+
+</main>
+
+
+    <script src="./app.js"></script>
+    <script scr="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</body>
+</html>
